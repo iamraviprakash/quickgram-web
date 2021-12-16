@@ -1,13 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-const App = () => {
-  return <div>Hello Glitchgramers!!</div>;
-};
+import RootComponent from './RootComponent';
+import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <RootComponent />
   </React.StrictMode>,
   document.getElementById('root'),
 );
