@@ -13,6 +13,9 @@
   "author": "iamraviprakash",
   "license": "ISC",
   "dependencies": {
+    "classnames": "^2.3.1",
+    "lodash": "^4.17.21",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
@@ -38,6 +41,7 @@
     "git-hooks": "^1.1.10",
     "postcss": "^8.4.5",
     "prettier": "2.5.1",
+    "sass": "^1.45.0",
     "tailwindcss": "^3.0.5",
     "vite": "^2.7.2"
   },
