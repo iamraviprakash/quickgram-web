@@ -1,3 +1,4 @@
 import Sidebar from './Sidebar';
+import ChatScreen from './ChatScreen';
 
-export { Sidebar };
+export { Sidebar, ChatScreen };
