@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import _ from 'lodash';
+import Avatar from '../Avatar';
 
-const SidebarItem = ({ item, isActive }) => {
+const SidebarItem = ({ item, isActive, onItemClick }) => {
   const containerClass = classNames(
-    'grid grid-cols-5 p-4 rounded-lg',
+    'grid gap-x-4 grid-cols-[min-content_1fr] p-4 rounded-lg cursor-pointer',
     {
       'text-white': isActive,
       'bg-sky-500': isActive,
@@ -16,21 +16,13 @@ const SidebarItem = ({ item, isActive }) => {
   );
 
   return (
-    <div className={containerClass}>
-      <div className="col-span-1">
-        <div
-          className="flex justify-center items-center text-xl 
-        font-bold h-12 w-12 rounded-full ring-2 ring-white 
-        bg-neutral-200 text-neutral-800"
-        >
-          {_.upperCase(_.first(item.title))}
-        </div>
-      </div>
-      <div className="grid col-span-4 grid-flow-row auto-rows-min">
-        <div className="row-span-1 font-bold text-ellipsis whitespace-nowrap overflow-hidden">
+    <div className={containerClass} onClick={onItemClick}>
+      <Avatar label={item.title} />
+      <div className="grid grid-flow-row auto-rows-min">
+        <div className="font-bold text-ellipsis whitespace-nowrap overflow-hidden">
           {item.title}
         </div>
-        <div className="row-span-1 text-ellipsis whitespace-nowrap overflow-hidden">
+        <div className="text-ellipsis whitespace-nowrap overflow-hidden">
           {item.subtitle}
         </div>
       </div>
@@ -41,6 +33,7 @@ const SidebarItem = ({ item, isActive }) => {
 SidebarItem.propTypes = {
   item: PropTypes.object,
   isActive: PropTypes.bool,
+  onItemClick: PropTypes.func,
 };
 
 export default SidebarItem;
