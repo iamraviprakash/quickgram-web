@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 const ChatScreen = ({ chat }) => {
   return (
-    <div className="flex flex-col h-screen bg-neutral-100">
+    <div className="flex flex-col h-screen bg-neutral-200">
       <Header title={chat.name} />
       <Feed messages={chat.messages} />
       <Footer />
