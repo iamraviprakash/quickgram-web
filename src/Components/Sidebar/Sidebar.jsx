@@ -4,6 +4,7 @@ import SidebarItem from '../SidebarItem';
 import PropTypes from 'prop-types';
 
 const Sidebar = ({ itemList, activeItemId, onItemClick }) => {
+  console;
   return (
     <div
       className={'flex flex-col h-screen border-r border-neutral-200'}
@@ -21,8 +22,9 @@ const Sidebar = ({ itemList, activeItemId, onItemClick }) => {
         {_.map(itemList, (item) => {
           const updateItem = {
             title: item.name,
-            subtitle: _.get(item, 'messages[0].content', ''),
+            subtitle: 'Last message will show here',
           };
+
           return (
             <SidebarItem
               key={item.id}
@@ -39,7 +41,7 @@ const Sidebar = ({ itemList, activeItemId, onItemClick }) => {
 
 Sidebar.propTypes = {
   itemList: PropTypes.array,
-  activeItemId: PropTypes.number,
+  activeItemId: PropTypes.string,
   onItemClick: PropTypes.func,
 };
 

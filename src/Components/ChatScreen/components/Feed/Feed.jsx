@@ -8,16 +8,19 @@ const Feed = ({ messages }) => {
     <div className="flex flex-col py-4 px-48 grow overflow-y-scroll gap-y-2">
       {_.map(messages, (message) => {
         const messageClass = classNames('flex', {
-          'justify-start': message.author !== 'me',
-          'justify-end': message.author === 'me',
+          'justify-start': message.createdBy.id !== '3',
+          'justify-end': message.createdBy.id === '3',
         });
+
+        const messageDateTime = new Date(parseInt(message.createdAt));
 
         return (
           <div key={message.id} className={messageClass}>
             <div className="flex flex-col p-4 bg-white rounded-lg max-w-xs">
               <div className="self-start">{message.content}</div>
               <div className="self-end text-neutral-600 text-sm">
-                {'11:49'}
+                {messageDateTime.getHours()}:
+                {messageDateTime.getMinutes()}
               </div>
             </div>
           </div>
