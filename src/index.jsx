@@ -1,16 +1,16 @@
 import React, { Suspense } from 'react';
+import './index.css';
 import ReactDOM from 'react-dom';
 import RootComponent from './RootComponent';
-import './index.css';
-import { dataClient, DataProvider } from './apiConfig';
+import { queryClient, QueryClientProvider } from './config';
 
 ReactDOM.render(
-  <DataProvider client={dataClient}>
+  <QueryClientProvider value={queryClient}>
     <Suspense fallback={'Loading...'}>
       <React.StrictMode>
         <RootComponent />
       </React.StrictMode>
     </Suspense>
-  </DataProvider>,
+  </QueryClientProvider>,
   document.getElementById('root'),
 );

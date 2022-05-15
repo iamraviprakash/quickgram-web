@@ -1,10 +1,5 @@
-import { useMutation } from 'react-query';
-import { graphQLClient } from '../apiConfig';
+import { useMutation } from 'urql';
 
-export default function _useMutation(query) {
-  return useMutation(async (variables) => {
-    return graphQLClient.request(query, {
-      input: variables,
-    });
-  });
+export default function _useMutation({ query }) {
+  return useMutation(query);
 }

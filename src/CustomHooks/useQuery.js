@@ -1,14 +1,5 @@
-import { useQuery } from 'react-query';
-import { graphQLClient } from '../apiConfig';
+import { useQuery } from 'urql';
 
-export default function _useQuery(query, variables = {}) {
-  return useQuery([query, variables], async () => {
-    const data = await graphQLClient
-      .request(query, variables)
-      .catch((error) => {
-        console.error(error);
-      });
-
-    return data;
-  });
+export default function _useQuery({ query, variables = {}, config }) {
+  return useQuery({ query, variables, ...config });
 }
