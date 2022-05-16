@@ -10,10 +10,15 @@ import { createMessageMutation } from './Controller/Mutation';
 import { getChatQuery } from './Controller/Query';
 
 const ChatScreen = ({ chatId }) => {
-  const { data, isLoading } = useQuery(getChatQuery, {
-    filter: { ids: [chatId] },
+  const [{ data, isLoading }] = useQuery({
+    query: getChatQuery,
+    variables: {
+      filter: { ids: [chatId] },
+    },
   });
-  const createMessage = useMutation(createMessageMutation);
+  const [createMessageResult, createMessage] = useMutation({
+    query: createMessageMutation,
+  });
 
   const chats = getChatsFromQuery({ data });
   const chat = _.find(chats, { id: chatId }) ?? {};
@@ -25,7 +30,7 @@ const ChatScreen = ({ chatId }) => {
       {isLoading ? 'Loading...' : <Feed messages={messages} />}
       <Footer
         sendMessage={async ({ content }) => {
-          await createMessage.mutate({
+          await createMessage({
             chatId: chat.id,
             content,
             createdBy: '3',

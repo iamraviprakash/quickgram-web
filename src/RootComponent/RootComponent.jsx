@@ -7,9 +7,12 @@ import { getUsersFromQuery } from './Controller/Helper';
 
 const RootComponent = () => {
   const [activeChatId, setActiveChatId] = useState(null);
-  const { data, isLoading } = useQuery(getUsersQuery, {
-    filter: {
-      ids: ['3'],
+  const [{ data, isLoading }] = useQuery({
+    query: getUsersQuery,
+    variables: {
+      filter: {
+        ids: ['3'],
+      },
     },
   });
   const users = getUsersFromQuery({ data });
