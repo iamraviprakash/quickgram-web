@@ -1,39 +1,58 @@
-import React from 'react';
-import _ from 'lodash';
-import SidebarItem from '../SidebarItem';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Tabs, Tab } from 'baseui/tabs';
+import Feed from './Components/Feed';
 
-const Sidebar = ({ itemList, activeItemId, onItemClick }) => {
-  console;
+const Sidebar = ({ itemList, onItemClick }) => {
+  const [activeKey, setActiveKey] = useState('0');
+
   return (
     <div
       className={'flex flex-col h-screen border-r border-neutral-200'}
     >
       <div
         className={
-          'flex py-8 px-4 font-bold text-2xl flex-none border-b border-neutral-200 p-4'
+          'flex font-bold text-2xl flex-none p-4 border-neutral-200 h-20 justify-center items-center'
         }
       >
-        Glitchgram
+        QuickGram
       </div>
-      <div
-        className={'flex flex-col overflow-y-scroll grow p-4 gap-y-2'}
-      >
-        {_.map(itemList, (item) => {
-          const updateItem = {
-            title: item.name,
-            subtitle: 'Last message will show here',
-          };
-
-          return (
-            <SidebarItem
-              key={item.id}
-              item={updateItem}
-              onItemClick={() => onItemClick(item.id)}
-              isActive={item.id == activeItemId}
-            />
-          );
-        })}
+      <div className="flex flex-col grow overflow-y-hidden">
+        <Tabs
+          onChange={({ activeKey }) => {
+            setActiveKey(activeKey);
+          }}
+          activeKey={activeKey}
+          overrides={{
+            Root: {
+              style: ({ $theme }) => ({
+                width: '100%',
+                height: '100%',
+              }),
+            },
+            Tab: {
+              style: ({ $theme }) => ({
+                width: '100%',
+                textAlign: 'center',
+              }),
+            },
+            TabContent: {
+              style: ({ $theme }) => ({
+                height: '100%',
+                overflowY: 'scroll',
+                padding: '1rem 2rem',
+              }),
+            },
+          }}
+        >
+          <Tab title="Members">
+            <Feed itemList={itemList} />
+          </Tab>
+          <Tab title="Room Details">
+            {/* <Settings /> */}
+            {'Settings will come here'}
+          </Tab>
+        </Tabs>
       </div>
     </div>
   );

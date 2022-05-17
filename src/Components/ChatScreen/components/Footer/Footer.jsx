@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { FiSend } from 'react-icons/fi';
+import { Input } from 'baseui/input';
+import { Button } from 'baseui/button';
 
 const Footer = (props) => {
   const { sendMessage } = props;
@@ -12,20 +15,41 @@ const Footer = (props) => {
   };
 
   return (
-    <div className="flex py-4 px-48 mb-8 gap-2">
-      <input
-        type="text"
-        placeholder="Message"
+    <div className="flex py-4 px-48 mb-8 gap-2 items-center">
+      <Input
         value={content}
-        className="flex grow rounded-lg p-4 focus:outline-none"
         onChange={(e) => setContent(e.target.value)}
+        placeholder="Message"
+        clearOnEscape
+        overrides={{
+          Root: {
+            style: ({ $theme }) => ({
+              display: 'flex',
+              flexGrow: 1,
+              borderRadius: '8px',
+            }),
+          },
+          Input: {
+            style: ({ $theme }) => ({
+              backgroundColor: 'white',
+            }),
+          },
+        }}
       />
-      <button
-        className="bg-neutral-500 text-white px-4 py-2 rounded-full"
+      <Button
         onClick={handleSendMessage}
+        overrides={{
+          BaseButton: {
+            style: ({ $theme }) => ({
+              width: '3rem',
+              height: '3rem',
+              borderRadius: '50%',
+            }),
+          },
+        }}
       >
-        Send
-      </button>
+        <FiSend size={'16'} />
+      </Button>
     </div>
   );
 };
