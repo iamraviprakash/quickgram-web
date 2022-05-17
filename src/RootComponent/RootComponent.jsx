@@ -1,44 +1,37 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import _ from 'lodash';
 import { useQuery } from 'CustomHooks';
-import { getUsersQuery } from './Controller/Query';
+import { getChatsQuery } from './Controller/Query';
 import { Sidebar, ChatScreen } from '../Components';
-import { getUsersFromQuery } from './Controller/Helper';
+import { getChatsFromQuery } from './Controller/Helper';
+import { useQueryParam, StringParam } from 'use-query-params';
 
 const RootComponent = () => {
-  const [activeChatId, setActiveChatId] = useState(null);
+  const [chatId] = useQueryParam('room_code', StringParam);
+
   const [{ data, isLoading }] = useQuery({
-    query: getUsersQuery,
+    query: getChatsQuery,
     variables: {
       filter: {
-        ids: ['3'],
+        ids: [chatId],
       },
     },
   });
-  const users = getUsersFromQuery({ data });
-  const chats = _.get(users, '0.chats', []);
 
-  useEffect(() => {
-    const initialChatId = _.get(chats, '0.id', null);
-    setActiveChatId(initialChatId);
-  }, [chats]);
-
-  const chat = _.find(chats, { id: activeChatId });
+  const chats = getChatsFromQuery({ data });
+  const chat = _.get(chats, '0', {});
+  const chatUsers = _.get(chat, 'users', []);
 
   return isLoading ? (
     'Loading...'
   ) : (
-    <div className="grid grid-cols-[480px_1fr] h-screen font-sans">
-      <Sidebar
-        itemList={chats}
-        activeItemId={activeChatId}
-        onItemClick={setActiveChatId}
-      />
+    <div className="grid grid-cols-[1fr_400px] h-screen font-sans">
       {!_.isEmpty(chat) ? (
-        <ChatScreen chatId={chat.id} />
+        <ChatScreen chat={chat} />
       ) : (
         <div className="h-screen bg-neutral-100"></div>
       )}
+      <Sidebar itemList={chatUsers} />
     </div>
   );
 };

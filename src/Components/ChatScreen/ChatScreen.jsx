@@ -4,37 +4,29 @@ import Feed from './Components/Feed';
 import Footer from './Components/Footer';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { useQuery, useMutation } from 'CustomHooks';
-import { getChatsFromQuery } from './Controller/Helper';
+import { useMutation } from 'CustomHooks';
 import { createMessageMutation } from './Controller/Mutation';
-import { getChatQuery } from './Controller/Query';
 
-const ChatScreen = ({ chatId }) => {
-  const [{ data, isLoading }] = useQuery({
-    query: getChatQuery,
-    variables: {
-      filter: { ids: [chatId] },
-    },
-  });
+const ChatScreen = ({ chat }) => {
   const [createMessageResult, createMessage] = useMutation({
     query: createMessageMutation,
   });
 
-  const chats = getChatsFromQuery({ data });
-  const chat = _.find(chats, { id: chatId }) ?? {};
   const messages = _.get(chat, 'messages', []);
 
   return (
     <div className="flex flex-col h-screen bg-neutral-200">
       <Header title={chat.name} />
-      {isLoading ? 'Loading...' : <Feed messages={messages} />}
+      <Feed messages={messages} />
       <Footer
         sendMessage={async ({ content }) => {
           await createMessage({
-            chatId: chat.id,
-            content,
-            createdBy: '3',
-            contentType: 'TEXT',
+            input: {
+              chatId: chat.id,
+              content,
+              createdBy: '3',
+              contentType: 'TEXT',
+            },
           });
         }}
       />
@@ -43,7 +35,7 @@ const ChatScreen = ({ chatId }) => {
 };
 
 ChatScreen.propTypes = {
-  chatId: PropTypes.string,
+  chat: PropTypes.object,
 };
 
 export default ChatScreen;

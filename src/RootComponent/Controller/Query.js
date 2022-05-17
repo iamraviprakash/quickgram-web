@@ -15,3 +15,28 @@ export const getUsersQuery = gql`
     }
   }
 `;
+
+export const getChatsQuery = gql`
+  query getChatsQuery($filter: ChatFilterInput) {
+    chatQuery {
+      chats(filter: $filter) {
+        id
+        name
+        type
+        users {
+          id
+          firstName
+          lastName
+        }
+        messages {
+          id
+          content
+          createdAt
+          createdBy {
+            id
+          }
+        }
+      }
+    }
+  }
+`;
