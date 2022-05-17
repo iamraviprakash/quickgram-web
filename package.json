@@ -14,6 +14,7 @@
   "author": "iamraviprakash",
   "license": "ISC",
   "dependencies": {
+    "baseui": "^11.0.3",
     "classnames": "^2.3.1",
     "graphql": "^16.5.0",
     "graphql-tag": "^2.12.6",
@@ -22,6 +23,9 @@
     "query-string": "^7.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
+    "styletron-engine-atomic": "^1.4.8",
+    "styletron-react": "^6.0.2",
     "urql": "^2.2.0",
     "use-query-params": "^1.2.3"
   },
@@ -43,6 +47,7 @@
     "eslint": "^8.4.1",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-baseui": "^11.0.3",
     "eslint-plugin-react": "^7.27.1",
     "git-hooks": "^1.1.10",
     "postcss": "^8.4.5",

@@ -11,8 +11,11 @@
     "ecmaVersion": 13,
     "sourceType": "module"
   },
-  "plugins": ["react"],
+  "plugins": ["react", "baseui"],
   "rules": {
-    "require-jsdoc": 0
+    "require-jsdoc": 0,
+    "baseui/deprecated-theme-api": "warn",
+    "baseui/deprecated-component-api": "warn",
+    "baseui/no-deep-imports": "warn"
   }
 }

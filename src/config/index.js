@@ -1,6 +1,8 @@
 import QueryClientManger from './QueryClientManager.js';
 import QueryClientProvider from './QueryClientProvider';
 import { API_ENDPOINT } from '../constants';
+import StyleProvider from './StyleProvider';
+import { QueryParamProvider } from 'use-query-params';
 
 // Instantiate Query Client Manager
 const queryClientManager = new QueryClientManger({
@@ -11,4 +13,9 @@ const queryClientManager = new QueryClientManger({
 queryClientManager.createClient();
 const client = queryClientManager.getClient();
 
-export { client as queryClient, QueryClientProvider };
+export {
+  client as queryClient,
+  QueryClientProvider,
+  StyleProvider,
+  QueryParamProvider,
+};
