@@ -7,7 +7,7 @@ import {
   QueryClientProvider,
   StyleProvider,
   QueryParamProvider,
-} from './config';
+} from 'Config';
 
 ReactDOM.render(
   <StyleProvider>

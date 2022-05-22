@@ -9,6 +9,7 @@ class StyleProvider extends React.Component {
     super(props);
     this.engine = new Styletron();
   }
+
   render() {
     const { children } = this.props;
 
@@ -22,7 +23,6 @@ class StyleProvider extends React.Component {
 
 StyleProvider.propTypes = {
   children: PropTypes.element,
-  value: PropTypes.object.isRequired,
 };
 
 export default StyleProvider;
