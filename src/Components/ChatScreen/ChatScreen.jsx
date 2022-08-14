@@ -4,13 +4,14 @@ import Feed from './Components/Feed';
 import Footer from './Components/Footer';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { useMutation } from 'CustomHooks';
+import { useMutation, useUserState } from 'CustomHooks';
 import { createMessageMutation } from './Controller/Mutation';
 
 const ChatScreen = ({ chat }) => {
   const [createMessageResult, createMessage] = useMutation({
     query: createMessageMutation,
   });
+  const [userState] = useUserState();
 
   const messages = _.get(chat, 'messages', []);
 
@@ -24,7 +25,7 @@ const ChatScreen = ({ chat }) => {
             input: {
               chatId: chat.id,
               content,
-              createdBy: '3',
+              createdBy: userState.id,
               contentType: 'TEXT',
             },
           });

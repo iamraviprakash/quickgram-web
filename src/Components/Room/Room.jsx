@@ -1,20 +1,23 @@
 import React from 'react';
 import _ from 'lodash';
-import { useQuery } from 'CustomHooks';
+
+import { useQuery, useUserState } from 'CustomHooks';
 import { getChatsQuery } from './Controller/Query';
 import Sidebar from '../Sidebar';
 import ChatScreen from '../ChatScreen';
 import { getChatsFromQuery } from './Controller/Helper';
-import PropTypes from 'prop-types';
 
-const Room = (props) => {
-  const { chatId } = props;
+const Room = () => {
+  const [userState] = useUserState({
+    id: null,
+    roomCode: null,
+  });
 
   const [{ data, isLoading }] = useQuery({
     query: getChatsQuery,
     variables: {
       filter: {
-        ids: [chatId],
+        codes: userState.roomCode,
       },
     },
   });
@@ -35,10 +38,6 @@ const Room = (props) => {
       <Sidebar itemList={chatUsers} />
     </div>
   );
-};
-
-Room.propTypes = {
-  chatId: PropTypes.string.isRequired,
 };
 
 export default Room;

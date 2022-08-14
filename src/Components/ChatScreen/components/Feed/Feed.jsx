@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import { BsCheckAll } from 'react-icons/bs';
 
 const Feed = ({ messages }) => {
   return (
@@ -18,9 +19,12 @@ const Feed = ({ messages }) => {
           <div key={message.id} className={messageClass}>
             <div className="flex flex-col p-4 bg-white rounded-lg max-w-xs">
               <div className="self-start">{message.content}</div>
-              <div className="self-end text-neutral-600 text-sm">
-                {messageDateTime.getHours()}:
-                {messageDateTime.getMinutes()}
+              <div className="flex self-end items-center gap-1">
+                <div className="text-neutral-600 text-sm">
+                  {messageDateTime.getHours()}:
+                  {messageDateTime.getMinutes()}
+                </div>
+                <BsCheckAll />
               </div>
             </div>
           </div>

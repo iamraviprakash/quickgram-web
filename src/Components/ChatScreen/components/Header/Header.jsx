@@ -8,7 +8,7 @@ const Header = ({ title }) => {
       <Avatar name={title} size={'scale1200'} />
       <div className="grid">
         <div className="font-bold">{title}</div>
-        <div className="text-neutral-600">{'last seen 5m ago'}</div>
+        <div className="text-neutral-600">{'8 members online'}</div>
       </div>
     </div>
   );

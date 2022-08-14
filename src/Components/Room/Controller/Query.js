@@ -22,7 +22,7 @@ export const getChatsQuery = gql`
       chats(filter: $filter) {
         id
         name
-        type
+        code
         users {
           id
           firstName
