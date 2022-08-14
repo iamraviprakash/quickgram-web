@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Input } from 'baseui/input';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
