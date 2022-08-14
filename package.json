@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "vite",
-    "build": "vite build",
+    "build:js": "vite build",
     "preview": "vite preview",
     "lint": "eslint --quiet src --ext .js,.jsx",
     "precommit": "git rev-parse -q --no-revs --verify MERGE_HEAD || bash lint-staged"
