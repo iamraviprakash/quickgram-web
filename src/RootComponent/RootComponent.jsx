@@ -1,9 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
-import { Room } from '../Components';
+import { useSearchParams } from 'react-router-dom';
 
 const RootComponent = () => {
-  const [chatId] = useQueryParam('room_code', StringParam);
+  const [searchParams] = useSearchParams();
+  const chatId = searchParams.get('room_code');
 
   return !_.isEmpty(chatId) && <Room chatId={chatId} />;
 };
