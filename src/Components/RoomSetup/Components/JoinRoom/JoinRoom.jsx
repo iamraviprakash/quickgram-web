@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Input } from 'baseui/input';
 import _ from 'lodash';
 
-import { useUserState } from 'CustomHooks';
+import { useUserState } from '@/CustomHooks';
 
 const ROOM_CODE_SIZE = 8;
 

@@ -4,7 +4,7 @@ import Feed from './Components/Feed';
 import Footer from './Components/Footer';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { useMutation, useUserState } from 'CustomHooks';
+import { useMutation, useUserState } from '@/CustomHooks';
 import { createMessageMutation } from './Controller/Mutation';
 
 const ChatScreen = ({ chat }) => {

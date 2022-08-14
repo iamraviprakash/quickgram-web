@@ -3,14 +3,14 @@ import _ from 'lodash';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { getRoomPath } from 'Utils';
+import { getRoomPath } from '@/Utils';
 
 import CreateRoom from './Components/CreateRoom';
 import JoinRoom from './Components/JoinRoom';
 import RoomOptions from './Components/RoomOptions';
 import EnterName from './Components/EnterName';
 
-import { useMutation, useUserState } from 'CustomHooks';
+import { useMutation, useUserState } from '@/CustomHooks';
 import {
   createRoomMutation,
   createUserMutation,

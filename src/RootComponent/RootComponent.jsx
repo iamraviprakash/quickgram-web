@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { Room, RoomSetup } from '../Components';
 import { useSearchParams } from 'react-router-dom';
 
-import { useUserState } from 'CustomHooks';
+import { useUserState } from '@/CustomHooks';
 
 const RootComponent = () => {
   const [searchParams] = useSearchParams();

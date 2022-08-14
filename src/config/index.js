@@ -1,6 +1,6 @@
 import QueryClientManger from './QueryClientManager.js';
 import QueryClientProvider from './QueryClientProvider';
-import { API_ENDPOINT } from 'Constants';
+import { API_ENDPOINT } from '@/Constants';
 import StyleProvider from './StyleProvider';
 
 // Instantiate Query Client Manager

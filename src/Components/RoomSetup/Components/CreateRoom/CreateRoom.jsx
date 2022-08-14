@@ -5,8 +5,8 @@ import _ from 'lodash';
 import { toaster, ToasterContainer } from 'baseui/toast';
 import { Button } from 'baseui/button';
 
-import { useUserState } from 'CustomHooks';
-import { getRoomUrl } from 'Utils';
+import { useUserState } from '@/CustomHooks';
+import { getRoomUrl } from '@/Utils';
 
 const CreateRoom = (props) => {
   const {

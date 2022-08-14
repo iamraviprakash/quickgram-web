@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 
-import { useQuery, useUserState } from 'CustomHooks';
+import { useQuery, useUserState } from '@/CustomHooks';
 import { getChatsQuery } from './Controller/Query';
 import Sidebar from '../Sidebar';
 import ChatScreen from '../ChatScreen';

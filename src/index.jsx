@@ -8,7 +8,7 @@ import {
   queryClient,
   QueryClientProvider,
   StyleProvider,
-} from 'Config';
+} from '@/Config';
 
 ReactDOM.render(
   <BrowserRouter>
