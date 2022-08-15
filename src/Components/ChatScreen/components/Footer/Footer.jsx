@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FiSend } from 'react-icons/fi';
 import { Input } from 'baseui/input';
-import { Button } from 'baseui/button';
+import { Button, SHAPE } from 'baseui/button';
 
 const Footer = (props) => {
   const { sendMessage } = props;
@@ -38,12 +38,12 @@ const Footer = (props) => {
       />
       <Button
         onClick={handleSendMessage}
+        shape={SHAPE.circle}
         overrides={{
           BaseButton: {
             style: ({ $theme }) => ({
-              width: '3rem',
-              height: '3rem',
-              borderRadius: '50%',
+              width: '48px',
+              height: '48px',
             }),
           },
         }}
