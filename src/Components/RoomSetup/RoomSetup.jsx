@@ -66,23 +66,25 @@ const RoomSetup = (props) => {
             firstName: _.trim(memberName),
             lastName: '',
           },
-        }).then((result) => {
-          setIsLoading(false);
+        })
+          .then((result) => {
+            const userDetails = _.get(
+              result,
+              'data.userMutation.createUser',
+              {},
+            );
 
-          const userDetails = _.get(
-            result,
-            'data.userMutation.createUser',
-            {},
-          );
-
-          setUserState((prevState) => {
-            return {
-              ...prevState,
-              id: userDetails.id,
-            };
+            setUserState((prevState) => {
+              return {
+                ...prevState,
+                id: userDetails.id,
+              };
+            });
+            setCurrentStep(step);
+          })
+          .finally(() => {
+            setIsLoading(false);
           });
-          setCurrentStep(step);
-        });
 
         break;
       }
@@ -94,27 +96,33 @@ const RoomSetup = (props) => {
               users: [],
               createdBy: 3,
             },
-          }).then((result) => {
-            setIsLoading(false);
+          })
+            .then((result) => {
+              const roomDetails = _.get(
+                result,
+                'data.chatMutation.createChat',
+                {},
+              );
 
-            const roomDetails = _.get(
-              result,
-              'data.chatMutation.createChat',
-              {},
-            );
+              setUserState((prevState) => {
+                return {
+                  ...prevState,
+                  roomId: roomDetails.id,
+                  roomCode: roomDetails.code,
+                };
+              });
 
-            setUserState((prevState) => {
-              return {
-                ...prevState,
-                roomId: roomDetails.id,
-                roomCode: roomDetails.code,
-              };
+              setRoomCodeArray(_.split(roomDetails.code, ''));
+              setCurrentStep(step);
+            })
+            .finally(() => {
+              setIsLoading(false);
             });
-            setRoomCodeArray(_.split(roomDetails.code, ''));
-          });
+        } else {
+          setIsLoading(false);
+          setCurrentStep(step);
         }
 
-        setCurrentStep(step);
         break;
       }
       case 'JOIN_ROOM': {
@@ -127,20 +135,24 @@ const RoomSetup = (props) => {
           input: {
             usersToAdd: [userState.id],
           },
-        }).then(() => {
-          setIsLoading(false);
+        })
+          .then(() => {
+            setIsLoading(false);
 
-          setUserState((prevState) => {
-            return {
-              ...prevState,
-              roomCode,
-              setupStatus: step,
-            };
+            setUserState((prevState) => {
+              return {
+                ...prevState,
+                roomCode,
+                setupStatus: step,
+              };
+            });
+
+            const roomUrl = getRoomPath({ roomCode });
+            navigate(roomUrl, { replace: true });
+          })
+          .finally(() => {
+            setIsLoading(false);
           });
-
-          const roomUrl = getRoomPath({ roomCode });
-          navigate(roomUrl, { replace: true });
-        });
 
         break;
       }
@@ -153,19 +165,21 @@ const RoomSetup = (props) => {
             name: payload.roomName,
             usersToAdd: [userState.id],
           },
-        }).then(() => {
-          setIsLoading(false);
+        })
+          .then(() => {
+            setUserState((prevState) => {
+              return {
+                ...prevState,
+                setupStatus: step,
+              };
+            });
 
-          setUserState((prevState) => {
-            return {
-              ...prevState,
-              setupStatus: step,
-            };
+            const roomUrl = getRoomPath({ roomCode });
+            navigate(roomUrl, { replace: true });
+          })
+          .finally(() => {
+            setIsLoading(false);
           });
-
-          const roomUrl = getRoomPath({ roomCode });
-          navigate(roomUrl, { replace: true });
-        });
 
         break;
       }
