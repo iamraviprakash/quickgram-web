@@ -1,12 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import { FiCopy } from 'react-icons/fi';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 import { Button, SHAPE } from 'baseui/button';
 import { useSearchParams } from 'react-router-dom';
 import { toaster, ToasterContainer } from 'baseui/toast';
 
+import { useMutation, useUserState } from '@/CustomHooks';
+import { deleteRoomMutation } from '../../Controller/Mutation';
 import { getRoomUrl } from '@/Utils';
 
-const Settings = (props) => {
+const Settings = ({ roomId, setLoader }) => {
+  const [userState, setUserState] = useUserState();
+
+  const [createRoomResult, deleteRoom] = useMutation({
+    query: deleteRoomMutation,
+  });
+
+  const navigate = useNavigate();
+
   const [searchParams] = useSearchParams();
   const roomCode = searchParams.get('room_code');
 
@@ -17,6 +30,25 @@ const Settings = (props) => {
 
     navigator.clipboard.writeText(roomUrl);
     toaster.info('Copied to clipboard');
+  };
+
+  const onDeleteRoom = async () => {
+    setLoader(true);
+
+    await deleteRoom({
+      id: roomId,
+    }).then(() => {
+      setUserState(() => ({
+        id: null,
+        roomId: null,
+        roomCode: null,
+        setupStatus: 'ENTER_NAME',
+      }));
+
+      navigate('/', { replace: true });
+    });
+
+    setLoader(false);
   };
 
   return (
@@ -49,9 +81,30 @@ const Settings = (props) => {
             <FiCopy size={16} />
           </Button>
         </div>
+        <hr />
+        <div className="flex p-4">
+          <Button
+            endEnhancer={() => <RiDeleteBin6Line size={24} />}
+            overrides={{
+              BaseButton: {
+                style: ({ $theme }) => ({
+                  width: '100%',
+                }),
+              },
+            }}
+            onClick={onDeleteRoom}
+          >
+            Delete the room
+          </Button>
+        </div>
       </div>
     </>
   );
+};
+
+Settings.propTypes = {
+  roomId: PropTypes.string,
+  setLoader: PropTypes.func,
 };
 
 export default Settings;

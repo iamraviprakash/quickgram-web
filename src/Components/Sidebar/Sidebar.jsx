@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 import { Tabs, Tab } from 'baseui/tabs';
 import Feed from './Components/Feed';
 import Settings from './Components/Settings';
+import _ from 'lodash';
 
-const Sidebar = ({ itemList, onItemClick }) => {
+const Sidebar = ({ chat, setLoader }) => {
   const [activeKey, setActiveKey] = useState('0');
+
+  const chatUsers = _.get(chat, 'users', []);
 
   return (
     <div
@@ -47,10 +50,10 @@ const Sidebar = ({ itemList, onItemClick }) => {
           }}
         >
           <Tab title="Members">
-            <Feed itemList={itemList} />
+            <Feed itemList={chatUsers} />
           </Tab>
           <Tab title="Room Details">
-            <Settings />
+            <Settings roomId={chat.id} setLoader={setLoader} />
           </Tab>
         </Tabs>
       </div>
@@ -59,9 +62,8 @@ const Sidebar = ({ itemList, onItemClick }) => {
 };
 
 Sidebar.propTypes = {
-  itemList: PropTypes.array,
-  activeItemId: PropTypes.string,
-  onItemClick: PropTypes.func,
+  chat: PropTypes.object,
+  setLoader: PropTypes.func,
 };
 
 export default Sidebar;
