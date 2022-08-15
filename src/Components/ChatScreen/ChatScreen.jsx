@@ -44,9 +44,11 @@ const ChatScreen = ({ chat }) => {
     }
   }, [newMessages]);
 
+  const membersCount = _.size(_.get(chat, 'users', []));
+
   return (
     <div className="flex flex-col h-screen bg-neutral-200">
-      <Header title={chat.name} />
+      <Header title={chat.name} membersCount={membersCount} />
       <Feed messages={messages} userId={userState.id} />
       <Footer
         sendMessage={async ({ content }) => {
