@@ -4,10 +4,9 @@
   "description": "A glitchy clone of telegram",
   "main": "index.js",
   "scripts": {
-    "start": "npm run dev",
-    "dev": "vite",
-    "build:js": "vite build",
-    "preview": "vite preview",
+    "start": "vite",
+    "build": "netlify build",
+    "deploy": "netlify deploy --prod",
     "lint": "eslint --quiet src --ext .js,.jsx",
     "precommit": "git rev-parse -q --no-revs --verify MERGE_HEAD || bash lint-staged"
   },
@@ -64,6 +63,6 @@
     ]
   },
   "engines": {
-    "node": "12.18.x"
+    "node": "14.20.x"
   }
 }
