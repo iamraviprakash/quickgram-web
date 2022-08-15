@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { BsCheckAll } from 'react-icons/bs';
 
-const Feed = ({ messages }) => {
+const Feed = ({ messages, userId }) => {
   return (
     <div className="flex flex-col py-4 px-48 grow overflow-y-scroll gap-y-2">
       {_.map(messages, (message) => {
         const messageClass = classNames('flex', {
-          'justify-start': message.createdBy.id !== '3',
-          'justify-end': message.createdBy.id === '3',
+          'justify-start': message.createdBy.id !== userId,
+          'justify-end': message.createdBy.id === userId,
         });
 
         const messageDateTime = new Date(parseInt(message.createdAt));
@@ -36,6 +36,7 @@ const Feed = ({ messages }) => {
 
 Feed.propTypes = {
   messages: PropTypes.array,
+  userId: PropTypes.string,
 };
 
 export default Feed;
