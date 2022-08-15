@@ -15,7 +15,7 @@
   "dependencies": {
     "@vitejs/plugin-react": "^1.0.7",
     "autoprefixer": "^10.4.0",
-    "baseui": "^11.0.3",
+    "baseui": "^11.2.1",
     "classnames": "^2.3.1",
     "graphql": "^16.5.0",
     "graphql-tag": "^2.12.6",

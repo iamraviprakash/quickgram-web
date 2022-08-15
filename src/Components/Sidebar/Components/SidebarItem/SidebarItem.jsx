@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar } from 'baseui/avatar';
+import { Badge, SHAPE } from 'baseui/badge';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 
 const SidebarItem = ({ item, onItemClick }) => {
@@ -13,7 +14,7 @@ const SidebarItem = ({ item, onItemClick }) => {
             {item.title}
           </div>
           <div className="text-ellipsis whitespace-nowrap overflow-hidden">
-            {item.subtitle}
+            {item.subtitle} <Badge content="TBD" shape={SHAPE.pill} />
           </div>
         </div>
       </div>
