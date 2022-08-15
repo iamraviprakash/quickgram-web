@@ -18,9 +18,9 @@ const SidebarItem = ({ item, onItemClick }) => {
           </div>
         </div>
       </div>
-      <div className="cursor-pointer">
+      {/* <div className="cursor-pointer">
         <BsThreeDotsVertical />
-      </div>
+      </div> */}
     </div>
   );
 };
