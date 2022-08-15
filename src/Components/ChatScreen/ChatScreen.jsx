@@ -1,19 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './Components/Header';
 import Feed from './Components/Feed';
 import Footer from './Components/Footer';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { useMutation, useUserState } from '@/CustomHooks';
+import {
+  useMutation,
+  useUserState,
+  useSubscription,
+} from '@/CustomHooks';
 import { createMessageMutation } from './Controller/Mutation';
+import { newMessageSubscription } from './Controller/Subscriptions';
+
+const handleSubscription = (messages = [], response) => {
+  return response ? [response.newMessage] : [];
+};
 
 const ChatScreen = ({ chat }) => {
+  const [messages, setMessages] = useState([]);
+
+  const [userState] = useUserState();
+
   const [createMessageResult, createMessage] = useMutation({
     query: createMessageMutation,
   });
-  const [userState] = useUserState();
 
-  const messages = _.get(chat, 'messages', []);
+  const [{ data: newMessages = [] }] = useSubscription(
+    { query: newMessageSubscription },
+    handleSubscription,
+  );
+
+  useEffect(() => {
+    setMessages((prevState) => {
+      return _.get(chat, 'messages', []);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!_.isEmpty(newMessages)) {
+      setMessages((prevState) => {
+        return [...prevState, ...newMessages];
+      });
+    }
+  }, [newMessages]);
 
   return (
     <div className="flex flex-col h-screen bg-neutral-200">

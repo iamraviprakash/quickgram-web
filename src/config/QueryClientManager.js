@@ -1,17 +1,32 @@
-import { createClient } from 'urql';
+import { Client, defaultExchanges, subscriptionExchange } from 'urql';
+import { SubscriptionClient } from 'subscriptions-transport-ws';
 
 class QueryClientManger {
   static clientCount = 0;
 
-  constructor({ url }) {
+  constructor({ url, subscriptionUrl }) {
     this.url = url;
+    this.subscriptionUrl = subscriptionUrl;
     this.client = null;
   }
 
   createClient = () => {
     if (QueryClientManger.clientCount == 0) {
-      this.client = createClient({
+      const subscriptionClient = new SubscriptionClient(
+        this.subscriptionUrl,
+        { reconnect: true },
+        WebSocket,
+      );
+
+      this.client = new Client({
         url: this.url,
+        exchanges: [
+          ...defaultExchanges,
+          subscriptionExchange({
+            forwardSubscription: (operation) =>
+              subscriptionClient.request(operation),
+          }),
+        ],
       });
 
       QueryClientManger.clientCount++;
