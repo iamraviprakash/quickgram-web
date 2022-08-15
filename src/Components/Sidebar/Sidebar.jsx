@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Tab } from 'baseui/tabs';
 import Feed from './Components/Feed';
+import Settings from './Components/Settings';
 
 const Sidebar = ({ itemList, onItemClick }) => {
   const [activeKey, setActiveKey] = useState('0');
@@ -49,8 +50,7 @@ const Sidebar = ({ itemList, onItemClick }) => {
             <Feed itemList={itemList} />
           </Tab>
           <Tab title="Room Details">
-            {/* <Settings /> */}
-            {'Settings will come here'}
+            <Settings />
           </Tab>
         </Tabs>
       </div>
