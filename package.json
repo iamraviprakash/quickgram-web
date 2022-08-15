@@ -1,7 +1,7 @@
 {
-  "name": "glitchgram",
+  "name": "quickgram-web",
   "version": "1.0.0",
-  "description": "A glitchy clone of telegram",
+  "description": "A quick messaging app client",
   "main": "index.js",
   "scripts": {
     "start": "vite",
