@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { BsCheckAll } from 'react-icons/bs';
 
 const Feed = ({ messages, userId }) => {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    ref.current.scrollTo({
+      top: ref.current.scrollHeight,
+      behavior: 'smooth',
+    });
+  }, [messages]);
+
   return (
-    <div className="flex flex-col py-4 px-48 grow overflow-y-scroll gap-y-2">
+    <div
+      ref={ref}
+      className="flex flex-col py-4 px-48 grow overflow-y-scroll gap-y-2"
+    >
       {_.map(messages, (message) => {
         const messageClass = classNames('flex', {
           'justify-start': message.createdBy.id !== userId,
