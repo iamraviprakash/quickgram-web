@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import _ from 'lodash';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Spinner, SIZE } from 'baseui/spinner';
 
 import { getRoomPath } from '@/Utils';
 
@@ -19,6 +20,8 @@ import {
 
 const RoomSetup = (props) => {
   const { initSetupStatus } = props;
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const [currentStep, setCurrentStep] = useState(null);
   const [roomCodeArray, setRoomCodeArray] = useState([]);
@@ -52,6 +55,8 @@ const RoomSetup = (props) => {
   });
 
   const goNext = async ({ step, payload }) => {
+    setIsLoading(true);
+
     switch (currentStep) {
       case 'ENTER_NAME': {
         // Validate entered name
@@ -62,6 +67,8 @@ const RoomSetup = (props) => {
             lastName: '',
           },
         }).then((result) => {
+          setIsLoading(false);
+
           const userDetails = _.get(
             result,
             'data.userMutation.createUser',
@@ -88,6 +95,8 @@ const RoomSetup = (props) => {
               createdBy: 3,
             },
           }).then((result) => {
+            setIsLoading(false);
+
             const roomDetails = _.get(
               result,
               'data.chatMutation.createChat',
@@ -119,6 +128,8 @@ const RoomSetup = (props) => {
             usersToAdd: [userState.id],
           },
         }).then(() => {
+          setIsLoading(false);
+
           setUserState((prevState) => {
             return {
               ...prevState,
@@ -143,6 +154,8 @@ const RoomSetup = (props) => {
             usersToAdd: [userState.id],
           },
         }).then(() => {
+          setIsLoading(false);
+
           setUserState((prevState) => {
             return {
               ...prevState,
@@ -169,46 +182,54 @@ const RoomSetup = (props) => {
 
   return (
     <div className="grid place-items-center h-screen w-screen">
-      <div className="flex w-[1000px] h-max p-2">
-        <div className="flex w-2/5 items-center py-4 px-8 flex-col justify-center">
-          <div className="font-bold text-4xl text-center">
-            QuickGram
-          </div>
-        </div>
-        <div className="flex w-3/5 border-l-2 items-center py-4 px-8 flex-col gap-4 justify-center">
-          {currentStep == 'ENTER_NAME' && (
-            <EnterName
-              onClickNext={() => goNext({ step: 'ROOM_OPTIONS' })}
-              memberName={memberName}
-              setMemberName={setMemberName}
-            />
-          )}
-          {currentStep == 'ROOM_OPTIONS' && (
-            <RoomOptions
-              memberName={memberName}
-              onClickCreate={() => goNext({ step: 'CREATE_ROOM' })}
-              onClickJoin={() => goNext({ step: 'JOIN_ROOM' })}
-            />
-          )}
-          {currentStep == 'CREATE_ROOM' && (
-            <CreateRoom
-              onClickNext={(params) =>
-                goNext({ step: 'COMPLETED', ...params })
-              }
-              roomCodeArray={roomCodeArray}
-              setRoomCodeArray={setRoomCodeArray}
-              onClickBack={goBack}
-            />
-          )}
-          {currentStep == 'JOIN_ROOM' && (
-            <JoinRoom
-              onClickNext={() => goNext({ step: 'COMPLETED' })}
-              roomCodeArray={roomCodeArray}
-              setRoomCodeArray={setRoomCodeArray}
-              onClickBack={goBack}
-            />
-          )}
-        </div>
+      <div className="flex w-[1000px] h-max p-2 justify-center">
+        {isLoading ? (
+          <Spinner $size={SIZE.large} />
+        ) : (
+          <>
+            <div className="flex w-2/5 items-center py-4 px-8 flex-col justify-center">
+              <div className="font-bold text-4xl text-center">
+                QuickGram
+              </div>
+            </div>
+            <div className="flex w-3/5 border-l-2 items-center py-4 px-8 flex-col gap-4 justify-center">
+              {currentStep == 'ENTER_NAME' && (
+                <EnterName
+                  onClickNext={() => goNext({ step: 'ROOM_OPTIONS' })}
+                  memberName={memberName}
+                  setMemberName={setMemberName}
+                />
+              )}
+              {currentStep == 'ROOM_OPTIONS' && (
+                <RoomOptions
+                  memberName={memberName}
+                  onClickCreate={() =>
+                    goNext({ step: 'CREATE_ROOM' })
+                  }
+                  onClickJoin={() => goNext({ step: 'JOIN_ROOM' })}
+                />
+              )}
+              {currentStep == 'CREATE_ROOM' && (
+                <CreateRoom
+                  onClickNext={(params) =>
+                    goNext({ step: 'COMPLETED', ...params })
+                  }
+                  roomCodeArray={roomCodeArray}
+                  setRoomCodeArray={setRoomCodeArray}
+                  onClickBack={goBack}
+                />
+              )}
+              {currentStep == 'JOIN_ROOM' && (
+                <JoinRoom
+                  onClickNext={() => goNext({ step: 'COMPLETED' })}
+                  roomCodeArray={roomCodeArray}
+                  setRoomCodeArray={setRoomCodeArray}
+                  onClickBack={goBack}
+                />
+              )}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
