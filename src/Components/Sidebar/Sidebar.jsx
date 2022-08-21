@@ -1,14 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Tab } from 'baseui/tabs';
+import _ from 'lodash';
+
+import { useSubscription } from '@/CustomHooks';
 import Feed from './Components/Feed';
 import Settings from './Components/Settings';
-import _ from 'lodash';
+import { userAddedSubscription } from './Controller/Subscription';
+
+const handleSubscription = (users = [], response) => {
+  return response ? [response.userAdded] : [];
+};
 
 const Sidebar = ({ chat, setLoader }) => {
   const [activeKey, setActiveKey] = useState('0');
+  const [users, setUsers] = useState([]);
 
-  const chatUsers = _.get(chat, 'users', []);
+  const [{ data: usersAdded = [] }] = useSubscription(
+    { query: userAddedSubscription, variables: { chatId: chat.id } },
+    handleSubscription,
+  );
+
+  useEffect(() => {
+    setUsers((prevState) => {
+      return _.get(chat, 'users', []);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!_.isEmpty(usersAdded)) {
+      setUsers((prevState) => {
+        return [...usersAdded, ...prevState];
+      });
+    }
+  }, [usersAdded]);
 
   return (
     <div
@@ -50,7 +75,7 @@ const Sidebar = ({ chat, setLoader }) => {
           }}
         >
           <Tab title="Members">
-            <Feed itemList={chatUsers} />
+            <Feed itemList={users} />
           </Tab>
           <Tab title="Room Details">
             <Settings roomId={chat.id} setLoader={setLoader} />
