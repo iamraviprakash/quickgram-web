@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
-export const newMessageSubscription = gql`
-  subscription NewMessageSubscription {
-    newMessage {
+export const messageAddedSubscription = gql`
+  subscription MessageAddedSubscription($chatId: ID!) {
+    messageAdded(chatId: $chatId) {
       id
       content
       contentType

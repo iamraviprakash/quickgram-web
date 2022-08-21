@@ -10,10 +10,10 @@ import {
   useSubscription,
 } from '@/CustomHooks';
 import { createMessageMutation } from './Controller/Mutation';
-import { newMessageSubscription } from './Controller/Subscriptions';
+import { messageAddedSubscription } from './Controller/Subscription';
 
 const handleSubscription = (messages = [], response) => {
-  return response ? [response.newMessage] : [];
+  return response ? [response.messageAdded] : [];
 };
 
 const ChatScreen = ({ chat }) => {
@@ -25,8 +25,11 @@ const ChatScreen = ({ chat }) => {
     query: createMessageMutation,
   });
 
-  const [{ data: newMessages = [] }] = useSubscription(
-    { query: newMessageSubscription },
+  const [{ data: messagesAdded = [] }] = useSubscription(
+    {
+      query: messageAddedSubscription,
+      variables: { chatId: chat.id },
+    },
     handleSubscription,
   );
 
@@ -37,12 +40,12 @@ const ChatScreen = ({ chat }) => {
   }, []);
 
   useEffect(() => {
-    if (!_.isEmpty(newMessages)) {
+    if (!_.isEmpty(messagesAdded)) {
       setMessages((prevState) => {
-        return [...prevState, ...newMessages];
+        return [...prevState, ...messagesAdded];
       });
     }
-  }, [newMessages]);
+  }, [messagesAdded]);
 
   const membersCount = _.size(_.get(chat, 'users', []));
 
