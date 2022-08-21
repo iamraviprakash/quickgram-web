@@ -94,7 +94,7 @@ const RoomSetup = (props) => {
             input: {
               name: '',
               users: [],
-              createdBy: 3,
+              createdBy: userState.id,
             },
           })
             .then((result) => {
