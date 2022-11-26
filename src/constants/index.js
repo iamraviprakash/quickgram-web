@@ -1,8 +1,8 @@
 // API endpoint
 export const API_ENDPOINT =
-  'https://quickgram-server.herokuapp.com/graphql';
+  'https://quickgram-server.onrender.com/graphql';
 
 export const SUBSCRIPTION_API_ENDPOINT =
-  'wss://quickgram-server.herokuapp.com/graphql';
+  'wss://quickgram-server.onrender.com/graphql';
 
 export const BASE_URL = window.location.origin;
