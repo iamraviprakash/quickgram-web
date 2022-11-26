@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import { userFragment } from '@/CommonController/Fragment';
 
 export const getUsersQuery = gql`
   query getUsersQuery($filter: UserFilterInput) {
@@ -24,19 +25,18 @@ export const getChatsQuery = gql`
         name
         code
         users {
-          id
-          firstName
-          lastName
+          ...userBasicDetails
         }
         messages {
           id
           content
           createdAt
           createdBy {
-            id
+            ...userBasicDetails
           }
         }
       }
     }
   }
+  ${userFragment.basicDetails}
 `;

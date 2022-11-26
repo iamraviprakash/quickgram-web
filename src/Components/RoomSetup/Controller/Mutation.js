@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import { userFragment } from '@/CommonController/Fragment';
 
 export const createRoomMutation = gql`
   mutation CreateRoomMutation($input: CreateChatInput!) {
@@ -8,25 +9,23 @@ export const createRoomMutation = gql`
         name
         code
         users {
-          id
-          firstName
-          lastName
+          ...userBasicDetails
         }
       }
     }
   }
+  ${userFragment.basicDetails}
 `;
 
 export const createUserMutation = gql`
   mutation CreateUserMutation($input: CreateUserInput!) {
     userMutation {
       createUser(input: $input) {
-        id
-        firstName
-        lastName
+        ...userBasicDetails
       }
     }
   }
+  ${userFragment.basicDetails}
 `;
 
 export const updateRoomMutation = gql`

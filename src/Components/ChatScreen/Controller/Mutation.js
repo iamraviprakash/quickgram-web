@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import { userFragment } from '@/CommonController/Fragment';
 
 export const createMessageMutation = gql`
   mutation CreateMessageMutation($input: CreateMessageInput!) {
@@ -8,11 +9,11 @@ export const createMessageMutation = gql`
         content
         contentType
         createdBy {
-          id
-          firstName
+          ...userBasicDetails
         }
         createdAt
       }
     }
   }
+  ${userFragment.basicDetails}
 `;

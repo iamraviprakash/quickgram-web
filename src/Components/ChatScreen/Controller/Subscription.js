@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import { userFragment } from '@/CommonController/Fragment';
 
 export const messageAddedSubscription = gql`
   subscription MessageAddedSubscription($chatId: ID!) {
@@ -7,10 +8,10 @@ export const messageAddedSubscription = gql`
       content
       contentType
       createdBy {
-        id
-        firstName
+        ...userBasicDetails
       }
       createdAt
     }
   }
+  ${userFragment.basicDetails}
 `;
