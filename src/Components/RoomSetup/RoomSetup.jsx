@@ -33,15 +33,6 @@ const RoomSetup = (props) => {
     setCurrentStep(initSetupStatus);
   }, []);
 
-  useEffect(() => {
-    setUserState((prevState) => {
-      return {
-        ...prevState,
-        setupStatus: currentStep,
-      };
-    });
-  }, [currentStep]);
-
   const navigate = useNavigate();
 
   const [createRoomResult, createRoom] = useMutation({
