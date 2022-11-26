@@ -2,9 +2,9 @@ import React, { useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { BsCheckAll } from 'react-icons/bs';
+import MessageBubble from '../MessageBubble';
 
-const Feed = ({ messages, userId }) => {
+const Feed = ({ messages, userId, membersCount }) => {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -20,25 +20,21 @@ const Feed = ({ messages, userId }) => {
       className="flex flex-col py-4 px-48 grow overflow-y-scroll gap-y-2"
     >
       {_.map(messages, (message) => {
+        const isMessageByUser = message.createdBy.id === userId;
+
         const messageClass = classNames('flex', {
-          'justify-start': message.createdBy.id !== userId,
-          'justify-end': message.createdBy.id === userId,
+          'justify-start': !isMessageByUser,
+          'justify-end': isMessageByUser,
         });
 
-        const messageDateTime = new Date(parseInt(message.createdAt));
+        const showMemberName = !isMessageByUser && membersCount > 2;
 
         return (
           <div key={message.id} className={messageClass}>
-            <div className="flex flex-col p-4 bg-white rounded-lg max-w-xs">
-              <div className="self-start">{message.content}</div>
-              <div className="flex self-end items-center gap-1">
-                <div className="text-neutral-600 text-sm">
-                  {messageDateTime.getHours()}:
-                  {messageDateTime.getMinutes()}
-                </div>
-                <BsCheckAll />
-              </div>
-            </div>
+            <MessageBubble
+              message={message}
+              showMemberName={showMemberName}
+            />
           </div>
         );
       })}
@@ -49,6 +45,7 @@ const Feed = ({ messages, userId }) => {
 Feed.propTypes = {
   messages: PropTypes.array,
   userId: PropTypes.string,
+  membersCount: PropTypes.number,
 };
 
 export default Feed;

@@ -52,7 +52,11 @@ const ChatScreen = ({ chat }) => {
   return (
     <div className="flex flex-col h-screen bg-neutral-200">
       <Header title={chat.name} membersCount={membersCount} />
-      <Feed messages={messages} userId={userState.id} />
+      <Feed
+        messages={messages}
+        userId={userState.id}
+        membersCount={membersCount}
+      />
       <Footer
         sendMessage={async ({ content }) => {
           await createMessage({
