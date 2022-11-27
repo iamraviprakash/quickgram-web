@@ -1,7 +1,17 @@
 import QueryClientManger from './QueryClientManager.js';
 import QueryClientProvider from './QueryClientProvider';
-import { API_ENDPOINT, SUBSCRIPTION_API_ENDPOINT } from '@/Constants';
+import {
+  API_ENDPOINT,
+  SUBSCRIPTION_API_ENDPOINT,
+  POSTHOG_API_ENDPOINT,
+} from '@/Constants';
 import StyleProvider from './StyleProvider';
+import posthog from 'posthog-js';
+
+// Initiate Post Hog
+posthog.init(import.meta.env.VITE_POSTHOG_API_KEY, {
+  api_host: POSTHOG_API_ENDPOINT,
+});
 
 // Instantiate Query Client Manager
 const queryClientManager = new QueryClientManger({

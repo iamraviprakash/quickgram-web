@@ -6,3 +6,5 @@ export const SUBSCRIPTION_API_ENDPOINT =
   'wss://quickgram-server.onrender.com/graphql';
 
 export const BASE_URL = window.location.origin;
+
+export const POSTHOG_API_ENDPOINT = 'https://app.posthog.com';
