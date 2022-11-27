@@ -25,9 +25,13 @@ APIs: [Source Code Link](https://github.com/iamraviprakash/quickgram-server)
 
 ### Non Functional Requirements
 - [ ] Implement E2E testing
+- [ ] Implement error handling
 - [ ] UI performance analysis
 - [ ] Add support for PWA
 - [ ] Support offline state
+- [ ] Multilingual support
+- [ ] Add Feature flag support
+
 
 
 
