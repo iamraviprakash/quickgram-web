@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { BsCheckAll } from 'react-icons/bs';
 
 const MessageBubble = ({ message, showMemberName }) => {
   const messageDateTime = new Date(parseInt(message.createdAt));
@@ -19,7 +18,6 @@ const MessageBubble = ({ message, showMemberName }) => {
         <div className="text-neutral-600 text-xs">
           {messageDateTime.getHours()}:{messageDateTime.getMinutes()}
         </div>
-        <BsCheckAll />
       </div>
     </div>
   );
