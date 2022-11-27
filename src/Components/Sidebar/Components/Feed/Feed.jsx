@@ -11,16 +11,10 @@ const Feed = (props) => {
       {_.map(itemList, (item) => {
         const updateItem = {
           title: item.firstName + ' ' + item.lastName,
-          subtitle: 'Active 5 mins ago',
+          subtitle: '',
         };
 
-        return (
-          <SidebarItem
-            key={item.id}
-            item={updateItem}
-            onItemClick={() => onItemClick(item.id)}
-          />
-        );
+        return <SidebarItem key={item.id} item={updateItem} />;
       })}
     </div>
   );
