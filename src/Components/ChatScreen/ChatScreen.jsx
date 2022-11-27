@@ -48,10 +48,11 @@ const ChatScreen = ({ chat }) => {
   }, [messagesAdded]);
 
   const membersCount = _.size(_.get(chat, 'users', []));
+  const subtitle = `${membersCount} members`;
 
   return (
     <div className="flex flex-col h-screen bg-neutral-200">
-      <Header title={chat.name} membersCount={membersCount} />
+      <Header title={chat.name} subtitle={subtitle} />
       <Feed
         messages={messages}
         userId={userState.id}
