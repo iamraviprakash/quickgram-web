@@ -8,5 +8,6 @@ console.log({
 });
 
 export const alias = [
-  { find: '@', replacement: path.resolve(__dirname) },
+  { find: 'src', replacement: '/src' },
+  { find: '@', replacement: path.resolve(__dirname, 'src') },
 ];
