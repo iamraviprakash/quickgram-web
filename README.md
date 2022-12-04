@@ -9,16 +9,16 @@
 
 ### 👋 Introduction
 Get started quickly on our platform to chat with anyone. Its created with an aim to provide 
-* Short term usage and private communication. Simple use, delete and forget safely.
+* Short term usage and anonymous communication. Simple use, delete and forget safely.
 * Keeps your chats clean on your favourite messaging platform
 * Dont aim to be another common messaging platform
 
 ### 🚀 Features 
 This section will mention different features present this project.
-* Creat room to chat privately
+* Creat room to chat anonymously
 * Invite people to be the part of your room
-* Safely delete the room if no longer needed
-* And with many more features like other messaging platform
+* Delete the room if no longer needed
+* And with many more features like other commonly used messaging platform
 
 ### 👨‍💻 Tech stack
 Here's a brief high-level overview of the tech stack the app uses:
@@ -26,6 +26,7 @@ Here's a brief high-level overview of the tech stack the app uses:
 * **Backend** ([Source](https://github.com/iamraviprakash/quickgram-server)): **Node**, **Apollo Server Express** and **PostgreSQL** is being used to serve frontend. 
 * **API**: **Graphql** is being used to as endpoint to perform CRUD operation.
 * **Tools and Libraries**: Vite, Babel, Lodash, Tailwind and Posthog
+
 
 <br/>
 <br/>
