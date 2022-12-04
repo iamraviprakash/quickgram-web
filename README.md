@@ -2,30 +2,38 @@
 
 <div align="center">
 <a href="https://www.codefactor.io/repository/github/iamraviprakash/quickgram-web"><img src="https://www.codefactor.io/repository/github/iamraviprakash/quickgram-web/badge" alt="CodeFactor" /></a>
-<img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/iamraviprakash/quickgram-web">
 <img alt="Netlify" src="https://img.shields.io/netlify/e36c34e8-819c-4c46-82d1-8b5603e57910">
+<img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/iamraviprakash/quickgram-web">
 </div>
 
 
 ### 👋 Introduction
-Web client code for a quick messaging app. ;)
-
+Get started quickly on our platform to chat with anyone. Its created with an aim to provide 
+* Short term usage and private communication. Simple use, delete and forget safely.
+* Keeps your chats clean on your favourite messaging platform
+* Dont aim to be another common messaging platform
 
 ### 🚀 Features 
 This section will mention different features present this project.
-* Feature 1
-* Feature 2
+* Creat room to chat privately
+* Invite people to be the part of your room
+* Safely delete the room if no longer needed
+* And with many more features like other messaging platform
 
 ### 👨‍💻 Tech stack
 Here's a brief high-level overview of the tech stack the app uses:
-* Frontend
-* Backend
-* API
+* **Frontend** (This): **React** and **Urql** are being used to serve UI. 
+* **Backend** ([Source](https://github.com/iamraviprakash/quickgram-server)): **Node**, **Apollo Server Express** and **PostgreSQL** is being used to serve frontend. 
+* **API**: **Graphql** is being used to as endpoint to perform CRUD operation.
+* **Tools and Libraries**: Vite, Babel, Lodash, Tailwind and Posthog
 
+<br/>
+<br/>
+<br/>
 
 
 <div align="center">
-ooo
+.....
 <br/>
 <b>build something crazy.</b>
 </div>
