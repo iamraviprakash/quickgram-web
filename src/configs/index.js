@@ -4,7 +4,7 @@ import {
   API_ENDPOINT,
   SUBSCRIPTION_API_ENDPOINT,
   POSTHOG_API_ENDPOINT,
-} from '@/Constants';
+} from '@/constants';
 import StyleProvider from './StyleProvider';
 import posthog from 'posthog-js';
 

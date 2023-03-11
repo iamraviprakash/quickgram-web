@@ -9,7 +9,7 @@ import { toaster, ToasterContainer } from 'baseui/toast';
 
 import { useMutation, useUserState } from '@/hooks';
 import { deleteRoomMutation } from '../../controllers/Mutation';
-import { getRoomUrl } from '@/Utils';
+import { getRoomUrl } from '@/utils';
 
 const Settings = ({ roomId, setLoader }) => {
   const [userState, setUserState] = useUserState();
