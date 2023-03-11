@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Spinner, SIZE } from 'baseui/spinner';
 
-import { getRoomPath } from '@/Utils';
+import { getRoomPath } from '@/utils';
 
 import CreateRoom from './components/CreateRoom';
 import JoinRoom from './components/JoinRoom';

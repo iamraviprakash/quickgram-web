@@ -6,7 +6,7 @@ import { toaster, ToasterContainer } from 'baseui/toast';
 import { Button } from 'baseui/button';
 
 import { useUserState } from '@/hooks';
-import { getRoomUrl } from '@/Utils';
+import { getRoomUrl } from '@/utils';
 
 import RoomCode from '@/components/RoomCode';
 
