@@ -1,10 +1,10 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect } from 'react';
 import { Button } from 'baseui/button';
 import PropTypes from 'prop-types';
-import { Input } from 'baseui/input';
-import _ from 'lodash';
 
 import { useUserState } from '@/CustomHooks';
+
+import RoomCode from '../RoomCode';
 
 const ROOM_CODE_SIZE = 8;
 
@@ -26,47 +26,16 @@ const JoinRoom = (props) => {
     }
   }, []);
 
-  const setRoomCodeCharAt = ({ index, value }) => {
-    setRoomCodeArray((prevState) => {
-      const newState = [...prevState];
-      newState[index] = value;
-      return newState;
-    });
-  };
-
   return (
     <>
       <div className="font-semibold text-xl mb-4 text-left w-full">
         Enter Room Code
       </div>
       <div className="flex gap-2 justify-center w-full py-4">
-        {_.map(roomCodeArray, (item, index) => {
-          return (
-            <Fragment key={index}>
-              <Input
-                value={item}
-                onChange={(e) =>
-                  setRoomCodeCharAt({
-                    index,
-                    value: e.target.value,
-                  })
-                }
-                clearOnEscape
-                maxLength={1}
-                overrides={{
-                  Input: {
-                    style: ({ $theme }) => ({
-                      textAlign: 'center',
-                    }),
-                  },
-                }}
-              />
-              {index == ROOM_CODE_SIZE / 2 - 1 && (
-                <div className="flex items-center">{'-'}</div>
-              )}
-            </Fragment>
-          );
-        })}
+        <RoomCode
+          values={roomCodeArray}
+          onChange={(values) => setRoomCodeArray(values)}
+        />
       </div>
       <div className="flex gap-2 w-full">
         <Button
