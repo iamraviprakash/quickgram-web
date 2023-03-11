@@ -8,6 +8,8 @@ import { Button } from 'baseui/button';
 import { useUserState } from '@/CustomHooks';
 import { getRoomUrl } from '@/Utils';
 
+import RoomCode from '../RoomCode';
+
 const CreateRoom = (props) => {
   const {
     onClickNext,
@@ -49,7 +51,7 @@ const CreateRoom = (props) => {
       <div className="font-semibold text-xl mb-4 text-left w-full">
         Room Details
       </div>
-      <div className="flex gap-4 flex-col items-center py-4">
+      <div className="flex gap-4 w-full flex-col items-center py-4">
         <div className="w-full">
           <Input
             value={roomName}
@@ -59,32 +61,7 @@ const CreateRoom = (props) => {
           />
         </div>
         <div className="flex w-full border-t-2" />
-        <div className="flex flex-col items-center gap-2">
-          <div className="flex gap-2 py-4">
-            {_.map(roomCodeArray, (item, index) => {
-              return (
-                <div className="flex gap-2" key={index}>
-                  <Input
-                    value={item}
-                    disabled
-                    clearOnEscape
-                    maxLength={1}
-                    overrides={{
-                      Input: {
-                        style: ({ $theme }) => ({
-                          textAlign: 'center',
-                        }),
-                      },
-                    }}
-                  />
-                  {index == _.size(roomCodeArray) / 2 - 1 && (
-                    <div className="flex items-center">{'-'}</div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        <RoomCode values={roomCodeArray} disabled />
         <div className="flex flex-col items-center gap-2 w-full">
           <div className="flex text-center font-semibold">
             Copy the link to share
