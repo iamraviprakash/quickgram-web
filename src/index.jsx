@@ -1,14 +1,14 @@
 import React, { Suspense } from 'react';
 import './index.css';
 import ReactDOM from 'react-dom';
-import RootComponent from './RootComponent';
+import RootComponent from './pages/RootComponent';
 import { BrowserRouter } from 'react-router-dom';
 
 import {
   queryClient,
   QueryClientProvider,
   StyleProvider,
-} from '@/Config';
+} from '@/configs';
 
 ReactDOM.render(
   <BrowserRouter>
