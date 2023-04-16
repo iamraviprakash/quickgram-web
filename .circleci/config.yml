@@ -32,6 +32,10 @@ jobs:
     docker:
       - image: cimg/node:18.12.1
     steps:
+      - restore_cache:
+          keys:
+            - dependency-cache-{{ checksum "package-lock.json" }}
+            - app-build-cache-{{ .Branch }}
       - run:
           name: Deploying the app
           command: ./node_modules/.bin/netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --prod --dir=dist
