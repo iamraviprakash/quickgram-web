@@ -18,14 +18,14 @@ jobs:
           # If you are using yarn, change the line below from "npm" to "yarn"
           pkg-manager: npm
       - save_cache:
-          key: dependency-cache-{{ .Branch }}
+          key: dependency-cache-{{ .Revision }}
           paths:
             - ./node_modules
       - run:
           name: Building the app
           command: ./node_modules/.bin/vite build
       - save_cache:
-          key: app-build-cache-{{ .Branch }}
+          key: app-build-cache-{{ .Revision }}
           paths:
             - ./dist
   deploy:
@@ -34,8 +34,8 @@ jobs:
     steps:
       - restore_cache:
           keys:
-            - dependency-cache-{{.Branch }}
-            - app-build-cache-{{ .Branch }}
+            - dependency-cache-{{ .Revision }}
+            - app-build-cache-{{ .Revision }}
       - run:
           name: Deploying the app
           command: ./node_modules/.bin/netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --prod --dir=dist
