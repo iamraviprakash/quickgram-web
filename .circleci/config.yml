@@ -35,6 +35,8 @@ jobs:
       - restore_cache:
           keys:
             - dependency-cache-{{ .Revision }}
+      - restore_cache:
+          keys:
             - app-build-cache-{{ .Revision }}
       - run:
           name: Deploying the app
