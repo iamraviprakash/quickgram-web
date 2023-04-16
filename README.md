@@ -1,6 +1,7 @@
 <img width="100%" alt="Quickgram" src="https://user-images.githubusercontent.com/22170382/205452449-76f39449-467e-40b7-8521-5c7ad5e618f7.png">
 
 <div align="center">
+<a href="https://dl.circleci.com/status-badge/redirect/gh/iamraviprakash/quickgram-web/tree/master"><img src="https://dl.circleci.com/status-badge/img/gh/iamraviprakash/quickgram-web/tree/master.svg?style=svg"></a>
 <a href="https://www.codefactor.io/repository/github/iamraviprakash/quickgram-web"><img src="https://www.codefactor.io/repository/github/iamraviprakash/quickgram-web/badge" alt="CodeFactor" /></a>
 <img alt="Netlify" src="https://img.shields.io/netlify/e36c34e8-819c-4c46-82d1-8b5603e57910">
 <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/iamraviprakash/quickgram-web">
