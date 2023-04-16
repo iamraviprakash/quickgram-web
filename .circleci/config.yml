@@ -19,7 +19,7 @@ jobs:
           pkg-manager: npm
       - run:
           name: Building the app
-          command: 'vite build'
+          command: ./node_modules/.bin/vite build
   deploy:
     docker:
       - image: cimg/node:18.12.1
@@ -32,7 +32,7 @@ jobs:
           pkg-manager: npm
       - run:
           name: Deploying the app
-          command: 'netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --prod --dir=dist'
+          command: ./node_modules/.bin/netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --prod --dir=dist
 
 workflows:
   # Below is the definition of your workflow.
