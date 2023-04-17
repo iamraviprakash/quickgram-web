@@ -20,11 +20,14 @@ jobs:
       - run:
           name: Building the app
           command: ./node_modules/.bin/vite build
-      # Save workspace for subsequent jobs (i.e. deploy)
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
+      - when:
+          condition:
+            equal: [master, << pipeline.git.branch >>]
+          steps:
+            - persist_to_workspace:
+                root: .
+                paths:
+                  - .
   deploy:
     docker:
       - image: cimg/node:18.12.1
